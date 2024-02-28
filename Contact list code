@@ -1,0 +1,61 @@
+class Contact:
+    def __init__(self, name, phonenumber, email, address):
+        self.name = name
+        self.phonenumber = phonenumber
+        self.email = email
+        self.address = address
+
+    def __str__(self):
+        return f"Name: {self.name}\nPhone Number: {self.phonenumber}\nEmail: {self.email}\nAddress: {self.address}\n"
+def addcontact():
+    name = input("Enter name: ")
+    phone_number = input("Enter phone number: ")
+    email = input("Enter email (optional): ")
+    address = input("Enter address (optional): ")
+    newcontact = Contact(name, phonenumber, email, address)
+    contacts.append(newcontact)
+    print("Contact added successfully!")
+def viewcontacts():
+    if not contacts:
+        print("No contacts found.")
+        return
+    print("-" * 30)
+    for contact in contacts:
+        print(contact)
+        print("-" * 30)
+def searchcontact():
+    searchterm = input("Enter name or phone number to search: ")
+    found_contacts = []
+    for contact in contacts:
+        if searchterm.lower() in contact.name.lower() or searchterm.lower() in contact.phonenumber.lower():
+            foundcontacts.append(contact)
+    if foundcontacts:
+        print("Found contacts:")
+        for contact in foundcontacts:
+            print(contact)
+            print("-" * 30)
+    else:
+        print("No contact found for the given search term.")
+def deletecontact():
+    searchterm = input("Enter name or phone number to delete: ")
+    foundcontact = None
+    for contact in contacts:
+        if searchterm.lower() in contact.name.lower() or searchterm.lower() in contact.phonenumber.lower():
+            foundcontact = contact
+            break
+    if not foundcontact:
+        print("Contact not found.")
+        return
+    confirmation = input("Are you sure you want to delete this contact? (y/n): ")
+    if confirmation.lower() == 'y':
+        contacts.remove(foundcontact)
+        print("Contact deleted successfully!")
+while True:
+    print("\n** Contact Management System **")
+    print("1. Add Contact")
+    print("2. View Contact List")
+    print("3. Search Contact")
+    print("4. Update Contact")
+    print("5. Delete Contact")
+    print("6. Exit")
+    choice = input("Enter your choice (1-6):”)
